@@ -1,0 +1,14 @@
+# Ubisoft / Trackmania
+windowrulev2 = workspace name:gameone silent,title:^(.*)Trackmania(.*)$|^(.*)Ubisoft Connect(.*)$
+windowrulev2 = tile,title:^(.*)Trackmania(.*)$|^(.*)Ubisoft Connect(.*)$
+
+# Minecraft
+windowrulev2 = workspace name:gametwo silent,title:^(.*)Minecraft(.*)$|^(.*)PrismLauncher(.*)$
+windowrulev2 = workspace name:gametwo silent,class:^(.*)PrismLauncher(.*)$
+windowrulev2 = tile,class:^(.*)PrismLauncher(.*)$
+
+# Trackmania Nations Forever
+windowrulev2 = workspace name:gamethree silent,class:steam_app_11020
+windowrulev2 = nofocus,class:steam_app_11020,fullscreen:1
+
+
