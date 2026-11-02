@@ -1,6 +1,6 @@
 -- hl = {}
 
-local _HOME = os.getenv("HOME")
+local home = os.getenv("HOME")
 
 hl.env("XDG_CURRENT_DESKTOP", "Hyprland")
 hl.env("XDG_SESSION_TYPE", "wayland")
@@ -8,7 +8,7 @@ hl.env("XDG_MENU_PREFIX", "arch-")
 
 hl.env("XCURSOR_SIZE", 40)
 hl.env("XCURSOR_THEME", "Bibata-Modern-Classic")
-hl.env("XCURSOR_PATH", _HOME .. "/.local/share/icons/")
+hl.env("XCURSOR_PATH", home .. "/.local/share/icons/")
 hl.env("HYPRCURSOR_SIZE", 40)
 hl.env("HYPRCURSOR_THEME", "Bibata-Modern-Classic")
 
@@ -29,7 +29,7 @@ hl.env("_JAVA_AWT_WM_NONREPARENTING", 1)
 hl.env("WLR_NO_HARDWARE_CURSORS", 1)
 hl.env("EDITOR", "nvim")
 hl.env("TERM", "xterm-ghostty")
-hl.env("HYPRSHOT_DIR", _HOME .. "/Pictures/screenshots/")
+hl.env("HYPRSHOT_DIR", home .. "/Pictures/screenshots/")
 
 hl.permission("/usr/(bin|local/bin)/grim", "screencopy", "allow")
 hl.permission("/usr/(lib|libexec|lib64)/xdg-desktop-portal-hyprland", "screencopy", "allow")
