@@ -8,7 +8,7 @@ hl.env("XDG_MENU_PREFIX", "arch-")
 
 hl.env("XCURSOR_SIZE", 40)
 hl.env("XCURSOR_THEME", "Bibata-Modern-Classic")
-hl.env("XCURSOR_PATH", home .. "/.local/share/icons")
+hl.env("XCURSOR_PATH", home .. "/.local/share/icons:/usr/share/icons")
 hl.env("HYPRCURSOR_SIZE", 40)
 hl.env("HYPRCURSOR_THEME", "Bibata-Modern-Classic")
 
@@ -28,7 +28,7 @@ hl.env("MOZ_DISABLE_RDD_SANDBOX", 1)
 hl.env("_JAVA_AWT_WM_NONREPARENTING", 1)
 hl.env("WLR_NO_HARDWARE_CURSORS", 1)
 hl.env("EDITOR", "nvim")
-hl.env("TERM", "xterm-ghostty")
+hl.env("TERM", "xterm-kitty")
 hl.env("HYPRSHOT_DIR", home .. "/Pictures/screenshots")
 
 hl.permission("/usr/(bin|local/bin)/grim", "screencopy", "allow")
@@ -55,18 +55,18 @@ hl.on("hyprland.start", function()
 end)
 
 hl.monitor({
-	output = "HDMI-A-1",
-	mode = "3440x1440@100",
+	output = "eDP-1",
+	mode = "1920x1200@60",
 	position = "0x0",
 	scale = 1,
 })
 
 hl.config({
 	input = {
-		kb_layout = "us_rabd,us,se",
+		kb_layout = "us",
 		kb_variant = "",
 		kb_model = "",
-		kb_options = "",
+		kb_options = "caps:escape",
 		kb_rules = "",
 		kb_file = "",
 
@@ -76,7 +76,7 @@ hl.config({
 		repeat_rate = 25,
 		repeat_delay = 600,
 		sensitivity = 0,
-		-- accel_profile = ""
+		accel_profile = "custom",
 		force_no_accel = false,
 		rotation = 0,
 		left_handed = false,
@@ -85,7 +85,7 @@ hl.config({
 		scroll_button = 0,
 		scroll_button_lock = false,
 		scroll_factor = 1.0,
-		natural_scroll = false,
+		natural_scroll = true,
 		follow_mouse = 2,
 		follow_mouse_threshold = 0.0,
 		focus_on_close = 0,
@@ -101,8 +101,8 @@ hl.config({
 		gaps_in = 5,
 		gaps_out = 10,
 		float_gaps = 5,
-		gaps_workspaces = 0,
-		layout = "slidr",
+		gaps_workspaces = 10,
+		layout = "scrolling",
 		no_focus_fallback = false,
 		resize_on_border = false,
 		extend_border_grab_area = 15,
@@ -112,8 +112,8 @@ hl.config({
 		modal_parent_blocking = true,
 		locale = "en_US",
 		col = {
-			active_border = { colors = { "rgba(fffab387)", "rgba(ffa6e3a1)" }, angle = 45 },
-			inactive_border = { colors = { "rgba(99585b70)", "rgba(99b4befe)" }, angle = 45 },
+			active_border = { colors = { "rgba(fffab387)", "rgba(fff9e2af)" }, angle = 45 },
+			inactive_border = { colors = { "rgba(99b4befe)", "rgba(99cdd6f4)" }, angle = 45 },
 			nogroup_border = { colors = { "rgba(99585b70)", "rgba(99b4befe)" }, angle = 45 },
 			-- nogroup_border_inactive = { colors = { "rgba(99585b70)", "rgba(99b4befe)" }, angle = 45 },
 		},
@@ -128,7 +128,7 @@ hl.config({
 
 	decoration = {
 		rounding = 10,
-		rounding_power = 0,
+		rounding_power = 1.00,
 
 		active_opacity = 1.0,
 		inactive_opacity = 1.0,
@@ -166,13 +166,25 @@ hl.config({
 		shadow = {
 			enabled = true,
 			range = 10,
-			render_power = 9,
+			render_power = 4,
 			sharp = false,
 			color = 0x11111bee,
 			color_inactive = 0x181825ee,
 			offset = { 5, 5 },
 			scale = 1.0,
 		},
+	},
+
+	scrolling = {
+		fullscreen_on_one_column = true,
+		column_width = 0.5,
+		focus_fit_method = 1,
+		follow_focus = 1,
+		follow_min_visible = 0.4,
+		explicit_column_widths = "0.3333, 0.5000, 0.6667, 1.0000",
+		wrap_focus = true,
+		wrap_swapcol = true,
+		direction = "right",
 	},
 
 	-- See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
@@ -182,7 +194,7 @@ hl.config({
 		smart_split = false,
 		smart_resizing = true,
 		permanent_direction_override = false,
-		special_scale_factor = 1,
+		-- special_scale_factor = 1,
 		split_width_multiplier = 1.0,
 		use_active_for_splits = true,
 		default_split_ratio = 1.0,
@@ -192,7 +204,7 @@ hl.config({
 	master = {
 		new_status = "master",
 		allow_small_split = false,
-		special_scale_factor = 0.3,
+		-- special_scale_factor = 0.3,
 		mfact = 0.35,
 		orientation = "center",
 		smart_resizing = false,
@@ -212,7 +224,7 @@ hl.config({
 		key_press_enables_dpms = false,
 		always_follow_on_dnd = true,
 		name_vk_after_proc = true,
-		layers_hog_keyboard_focus = true,
+		-- layers_hog_keyboard_focus = true,
 		animate_manual_resizes = false,
 		animate_mouse_windowdragging = false,
 		disable_autoreload = false,
@@ -380,20 +392,6 @@ hl.config({
 	},
 })
 
--- hl.gesture({
--- 	workspace_swipe_distance = 300,
--- 	workspace_swipe_touch = false,
--- 	workspace_swipe_invert = true,
--- 	workspace_swipe_touch_invert = false,
--- 	workspace_swipe_min_speed_to_force = 30,
--- 	workspace_swipe_cancel_ratio = 0.5,
--- 	workspace_swipe_create_new = true,
--- 	workspace_swipe_direction_lock = true,
--- 	workspace_swipe_direction_lock_threshold = 10,
--- 	workspace_swipe_forever = false,
--- 	workspace_swipe_use_r = false,
--- })
-
 hl.device({
 	name = "compx-epomaker-carbonx",
 	sensitivity = -0.5,
@@ -404,36 +402,41 @@ hl.device = {
 	accel_profile = "flat",
 	-- other per-device options
 }
--- hl.device({
--- 	name = "compx-epomaker-carbonx",
--- 	sensitivity = -0.5,
--- })
 
+-- Curves
+hl.curve("springEffect", { type = "spring", stiffness = 128.95, damping = 7.55, mass = 0.55 })
 hl.curve("easeOutQuint", { type = "bezier", points = { { 0.23, 1 }, { 0.32, 1 } } })
-hl.curve("easeInOutCubic", { type = "bezier", points = { { 0.65, 0.05 }, { 0.36, 1 } } })
-hl.curve("linear", { type = "bezier", points = { { 0, 0 }, { 1, 1 } } })
+hl.curve("easeInOutCubic", { type = "bezier", points = { { 0.65, 0.25 }, { 0.45, 0.85 } } })
+hl.curve("linear", { type = "bezier", points = { { 0, 0.4 }, { 0.4, 1 } } })
 hl.curve("almostLinear", { type = "bezier", points = { { 0.5, 0.5 }, { 0.75, 1 } } })
 hl.curve("quick", { type = "bezier", points = { { 0.15, 0 }, { 0.1, 1 } } })
 hl.curve("easeOutCubic", { type = "bezier", points = { { 0.1, 0.3 }, { 0.1, 0.9 } } })
 hl.curve("easeInCubic", { type = "bezier", points = { { 0.6, 0.1 }, { 0.7, 0.2 } } })
 hl.curve("easeInBack", { type = "bezier", points = { { 0.6, -0.3 }, { 0.75, 0.1 } } })
 
+-- Animation, use curves here
 hl.animation({ leaf = "global", enabled = true, speed = 10, bezier = "default" })
 hl.animation({ leaf = "border", enabled = true, speed = 5.39, bezier = "easeOutQuint" })
--- hl.animation({ leaf = "windows", enabled = true, speed = 4.79, spring = "easy" })
--- hl.animation({ leaf = "windowsIn", enabled = true, speed = 4.1, spring = "easy", style = "popin 87%" })
-hl.animation({ leaf = "windowsOut", enabled = true, speed = 1.49, bezier = "linear", style = "popin 87%" })
-hl.animation({ leaf = "fadeIn", enabled = true, speed = 1.73, bezier = "almostLinear" })
-hl.animation({ leaf = "fadeOut", enabled = true, speed = 1.46, bezier = "almostLinear" })
-hl.animation({ leaf = "fade", enabled = true, speed = 3.03, bezier = "quick" })
+hl.animation({ leaf = "windows", enabled = true, speed = 4.79, bezier = "linear" })
+hl.animation({ leaf = "windowsIn", enabled = true, speed = 5.1, bezier = "almostLinear", style = "popin 87%" })
+hl.animation({ leaf = "windowsOut", enabled = true, speed = 5.49, bezier = "almostLinear", style = "popin 87%" })
+-- hl.animation({ leaf = "windows", enabled = true, speed = 4.79, bezier = "linear" })
+-- hl.animation({ leaf = "windowsIn", enabled = true, speed = 5.1, spring = "springEffect", style = "popin 87%" })
+-- hl.animation({ leaf = "windowsOut", enabled = true, speed = 5.49, bezier = "easeOutQuint", style = "popin 87%" })
 hl.animation({ leaf = "layers", enabled = true, speed = 3.81, bezier = "easeOutQuint" })
 hl.animation({ leaf = "layersIn", enabled = true, speed = 4, bezier = "easeOutQuint", style = "fade" })
 hl.animation({ leaf = "layersOut", enabled = true, speed = 1.5, bezier = "linear", style = "fade" })
+-- hl.animation({ leaf = "fade", enabled = true, speed = 3.03, bezier = "quick" })
+-- hl.animation({ leaf = "fadeIn", enabled = true, speed = 1.73, bezier = "almostLinear" })
+-- hl.animation({ leaf = "fadeOut", enabled = true, speed = 1.46, bezier = "almostLinear" })
+hl.animation({ leaf = "fade", enabled = true, speed = 3.03, bezier = "almostLinear" })
+hl.animation({ leaf = "fadeIn", enabled = true, speed = 1.5, spring = "springEffect" })
+hl.animation({ leaf = "fadeOut", enabled = true, speed = 1.46, spring = "springEffect" })
 hl.animation({ leaf = "fadeLayersIn", enabled = true, speed = 1.79, bezier = "almostLinear" })
 hl.animation({ leaf = "fadeLayersOut", enabled = true, speed = 1.39, bezier = "almostLinear" })
-hl.animation({ leaf = "workspaces", enabled = true, speed = 1.94, bezier = "almostLinear", style = "fade" })
-hl.animation({ leaf = "workspacesIn", enabled = true, speed = 1.21, bezier = "almostLinear", style = "fade" })
-hl.animation({ leaf = "workspacesOut", enabled = true, speed = 1.94, bezier = "almostLinear", style = "fade" })
+hl.animation({ leaf = "workspaces", enabled = true, speed = 2.94, bezier = "almostLinear", style = "fade" })
+hl.animation({ leaf = "workspacesIn", enabled = true, speed = 4.21, bezier = "easeInCubic", style = "fade" })
+hl.animation({ leaf = "workspacesOut", enabled = true, speed = 7.94, bezier = "easeInCubic", style = "fade" })
 hl.animation({ leaf = "zoomFactor", enabled = true, speed = 7, bezier = "quick" })
 
 local terminal = "kitty"
@@ -497,6 +500,12 @@ hl.bind(main_mod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 hl.bind("PRINT", hl.dsp.exec_raw("hyprshot -m output -o $HYPRSHOT_DIR"))
 hl.bind(main_mod .. " + PRINT", hl.dsp.exec_raw("hyprshot -m window -o $HYPRSHOT_DIR"))
 hl.bind(main_mod .. " + SHIFT + PRINT", hl.dsp.exec_raw("hyprshot -m region -o $HYPRSHOT_DIR"))
+
+-- Brightness
+hl.bind(main_mod .. " + CTRL + F5", hl.dsp.exec_raw("brightnessctl set 970-"))
+hl.bind(main_mod .. " + SHIFT + F2", hl.dsp.exec_raw("brightnessctl set 970-"))
+hl.bind(main_mod .. " + CTRL + F6", hl.dsp.exec_raw("brightnessctl set +970"))
+hl.bind(main_mod .. " + SHIFT + F3", hl.dsp.exec_raw("brightnessctl set +970"))
 
 hl.on("hyprland.start", function()
 	hl.exec_cmd("dbis-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
