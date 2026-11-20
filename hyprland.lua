@@ -1,5 +1,3 @@
--- hl = {}
-
 local home = os.getenv("HOME")
 
 hl.env("XDG_CURRENT_DESKTOP", "Hyprland")
@@ -49,9 +47,6 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("wbg --stretch ~/Pictures/wallpapers/anime-cyber-bright-eyes.jpg")
 	hl.exec_cmd("nwg-panel")
 	hl.exec_cmd("dunst")
-
-	hl.dsp.focus({ workspace = 8 })
-	hl.exec_cmd("steam")
 end)
 
 hl.monitor({
@@ -419,7 +414,7 @@ hl.animation({ leaf = "global", enabled = true, speed = 10, bezier = "default" }
 hl.animation({ leaf = "border", enabled = true, speed = 5.39, bezier = "easeOutQuint" })
 hl.animation({ leaf = "windows", enabled = true, speed = 4.79, bezier = "linear" })
 hl.animation({ leaf = "windowsIn", enabled = true, speed = 5.1, bezier = "almostLinear", style = "popin 87%" })
-hl.animation({ leaf = "windowsOut", enabled = true, speed = 5.49, bezier = "almostLinear", style = "popin 87%" })
+hl.animation({ leaf = "windowsOut", enabled = true, speed = 5.49, spring = "springEffect", style = "popin 87%" })
 -- hl.animation({ leaf = "windows", enabled = true, speed = 4.79, bezier = "linear" })
 -- hl.animation({ leaf = "windowsIn", enabled = true, speed = 5.1, spring = "springEffect", style = "popin 87%" })
 -- hl.animation({ leaf = "windowsOut", enabled = true, speed = 5.49, bezier = "easeOutQuint", style = "popin 87%" })
@@ -435,8 +430,8 @@ hl.animation({ leaf = "fadeOut", enabled = true, speed = 1.46, spring = "springE
 hl.animation({ leaf = "fadeLayersIn", enabled = true, speed = 1.79, bezier = "almostLinear" })
 hl.animation({ leaf = "fadeLayersOut", enabled = true, speed = 1.39, bezier = "almostLinear" })
 hl.animation({ leaf = "workspaces", enabled = true, speed = 2.94, bezier = "almostLinear", style = "fade" })
-hl.animation({ leaf = "workspacesIn", enabled = true, speed = 4.21, bezier = "easeInCubic", style = "fade" })
-hl.animation({ leaf = "workspacesOut", enabled = true, speed = 7.94, bezier = "easeInCubic", style = "fade" })
+hl.animation({ leaf = "workspacesIn", enabled = true, speed = 1.21, bezier = "easeInCubic", style = "fade" })
+hl.animation({ leaf = "workspacesOut", enabled = true, speed = 2.94, bezier = "easeInCubic", style = "fade" })
 hl.animation({ leaf = "zoomFactor", enabled = true, speed = 7, bezier = "quick" })
 
 local terminal = "kitty"
@@ -473,16 +468,16 @@ for i = 1, 10 do
 	hl.bind(main_mod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
 end
 
-hl.bind("F4", hl.dsp.focus({ workspace = 994 }))
-hl.bind("SHIFT + F4", hl.dsp.window.move({ workspace = 994 }))
-hl.bind("F5", hl.dsp.focus({ workspace = 995 }))
-hl.bind("SHIFT + F5", hl.dsp.window.move({ workspace = 995 }))
-hl.bind("F6", hl.dsp.focus({ workspace = 996 }))
-hl.bind("SHIFT + F6", hl.dsp.window.move({ workspace = 996 }))
-hl.bind("F7", hl.dsp.focus({ workspace = 997 }))
-hl.bind("SHIFT + F7", hl.dsp.window.move({ workspace = 997 }))
-hl.bind("F8", hl.dsp.focus({ workspace = 998 }))
-hl.bind("SHIFT + F8", hl.dsp.window.move({ workspace = 998 }))
+-- hl.bind("F4", hl.dsp.focus({ workspace = 994 }))
+-- hl.bind("SHIFT + F4", hl.dsp.window.move({ workspace = 994 }))
+-- hl.bind("F5", hl.dsp.focus({ workspace = 995 }))
+-- hl.bind("SHIFT + F5", hl.dsp.window.move({ workspace = 995 }))
+-- hl.bind("F6", hl.dsp.focus({ workspace = 996 }))
+-- hl.bind("SHIFT + F6", hl.dsp.window.move({ workspace = 996 }))
+-- hl.bind("F7", hl.dsp.focus({ workspace = 997 }))
+-- hl.bind("SHIFT + F7", hl.dsp.window.move({ workspace = 997 }))
+-- hl.bind("F8", hl.dsp.focus({ workspace = 998 }))
+-- hl.bind("SHIFT + F8", hl.dsp.window.move({ workspace = 998 }))
 
 -- Example special workspace (scratchpad)
 hl.bind(main_mod .. " + S", hl.dsp.workspace.toggle_special("magic"))
@@ -500,23 +495,59 @@ hl.bind(main_mod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 hl.bind("PRINT", hl.dsp.exec_raw("hyprshot -m output -o $HYPRSHOT_DIR"))
 hl.bind(main_mod .. " + PRINT", hl.dsp.exec_raw("hyprshot -m window -o $HYPRSHOT_DIR"))
 hl.bind(main_mod .. " + SHIFT + PRINT", hl.dsp.exec_raw("hyprshot -m region -o $HYPRSHOT_DIR"))
+-- lock computer when closing lid
+hl.bind(
+	"switch:on:Lid Switch",
+	hl.dsp.exec_cmd("hyprlock & sleep 1 && systemctl suspend"),
+	{ locked = true, description = "Lock and suspend on laptop lid close" }
+)
 
--- Brightness
-hl.bind(main_mod .. " + CTRL + F5", hl.dsp.exec_raw("brightnessctl set 970-"))
-hl.bind(main_mod .. " + SHIFT + F2", hl.dsp.exec_raw("brightnessctl set 970-"))
-hl.bind(main_mod .. " + CTRL + F6", hl.dsp.exec_raw("brightnessctl set +970"))
-hl.bind(main_mod .. " + SHIFT + F3", hl.dsp.exec_raw("brightnessctl set +970"))
+-- Volume
+hl.bind(main_mod .. " + XF86AudioMute", hl.dsp.exec_raw("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"))
+hl.bind(main_mod .. " + XF86AudioMicMute", hl.dsp.exec_raw("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"))
+hl.bind(main_mod .. " + XF86AudioLowerVolume", hl.dsp.exec_raw("wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%-"))
+hl.bind(main_mod .. " + XF86AudioRaiseVolume", hl.dsp.exec_raw("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"))
 
-hl.on("hyprland.start", function()
-	hl.exec_cmd("dbis-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
-	hl.exec_cmd("systemctl --user start hyprpolkitagent")
-	hl.exec_cmd("hypridle")
-	hl.exec_cmd("wbg --stretch ~/Pictures/wallpapers/takashi-miyazaki-unsplash.jpg")
-	hl.exec_cmd("nwg-panel")
-	hl.exec_cmd("dunst")
-	hl.exec_cmd("steam")
-	hl.exec_cmd("wl-paste --type text --watch cliphist store")
-	hl.exec_cmd("wl-paste --type image --watch cliphist store")
-	hl.exec_cmd("otd-daemon")
-	hl.exec_cmd("eww daemon")
-end)
+-- Touchpad toggle
+-- hl.bind(main_mod .. "", hl.dsp.exec_raw(""))
+
+local function battery_monitor()
+	-- Run the poll loop in a detached subshell so Hyprland's main loop is never blocked
+	local cmd = [[sh -c '
+		while true; do
+			sleep 20
+			status=$(cat /sys/class/power_supply/BAT0/status 2>/dev/null)
+			now=$(cat /sys/class/power_supply/BAT0/energy_now 2>/dev/null)
+			full=$(cat /sys/class/power_supply/BAT0/energy_full 2>/dev/null)
+			if [ -n "$now" ] && [ -n "$full" ] && [ "$full" -gt 0 ] && [ "$status" != "Charging" ]; then
+				awk "BEGIN { exit !(($now / $full) < 0.06) }" && { hyprlock; systemctl suspend; break; }
+			fi
+		done
+	' >/dev/null 2>&1 &]]
+	hl.exec_cmd(cmd)
+end
+
+local function read_sysfs(path)
+	local file = io.open(path, "r")
+	if not file then
+		return nil
+	end
+
+	local content = file:read("*l")
+	file:close()
+
+	return content and content:match("^%s*(.-)%s*$")
+end
+
+-- get the laptop vendor
+local vendor = read_sysfs("/sys/class/dmi/id/sys_vendor")
+-- brand specific laptop settings
+if vendor == "LG Electronics" then
+	-- Brightness
+	hl.bind(main_mod .. " + XF86MonBrightnessDown", hl.dsp.exec_raw("brightnessctl set 4800-"))
+	hl.bind(main_mod .. " + XF86MonBrightnessUp", hl.dsp.exec_raw("brightnessctl set +4800"))
+elseif vendor == "LENOVO" then
+	-- Brightness
+	hl.bind(main_mod .. " + XF86MonBrightnessDown", hl.dsp.exec_raw("brightnessctl set 970-"))
+	hl.bind(main_mod .. " + XF86MonBrightnessUp", hl.dsp.exec_raw("brightnessctl set +970"))
+end
