@@ -49,13 +49,6 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("dunst")
 end)
 
-hl.monitor({
-	output = "eDP-1",
-	mode = "1920x1200@60",
-	position = "0x0",
-	scale = 1,
-})
-
 hl.config({
 	input = {
 		kb_layout = "us",
@@ -543,10 +536,22 @@ end
 local vendor = read_sysfs("/sys/class/dmi/id/sys_vendor")
 -- brand specific laptop settings
 if vendor == "LG Electronics" then
+	hl.monitor({
+		output = "eDP-1",
+		mode = "2560x1600@60",
+		position = "0x0",
+		scale = 1,
+	})
 	-- Brightness
 	hl.bind(main_mod .. " + XF86MonBrightnessDown", hl.dsp.exec_raw("brightnessctl set 4800-"))
 	hl.bind(main_mod .. " + XF86MonBrightnessUp", hl.dsp.exec_raw("brightnessctl set +4800"))
 elseif vendor == "LENOVO" then
+	hl.monitor({
+		output = "eDP-1",
+		mode = "1920x1200@60",
+		position = "0x0",
+		scale = 1,
+	})
 	-- Brightness
 	hl.bind(main_mod .. " + XF86MonBrightnessDown", hl.dsp.exec_raw("brightnessctl set 970-"))
 	hl.bind(main_mod .. " + XF86MonBrightnessUp", hl.dsp.exec_raw("brightnessctl set +970"))
